@@ -12,28 +12,27 @@ import java.io.IOException;
 
 public class Game {
     private Screen screen;
-    private int x = 10;
-    private int y = 10;
+    private Hero hero;
 
     private void draw() throws IOException {
         this.screen.clear();
-        this.screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
+        this.hero.draw(screen);
         this.screen.refresh();
     }
 
     private void processKey(KeyStroke key) throws IOException {
         switch (key.getKeyType()){
             case ArrowDown:
-                y += 1;
+                this.hero.moveDown();
                 break;
             case ArrowUp:
-                y -= 1;
+                this.hero.moveUp();
                 break;
             case ArrowLeft:
-                x -= 1;
+                this.hero.moveLeft();
                 break;
             case ArrowRight:
-                x += 1;
+                this.hero.moveRight();
                 break;
             case Character:
                 screen.close(); //next keystroke will be EOF because screen was closed
@@ -42,6 +41,8 @@ public class Game {
     }
 
     public Game(){
+        this.hero = new Hero(10, 10);
+
         try {
             TerminalSize terminalSize = new TerminalSize(40, 20);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
