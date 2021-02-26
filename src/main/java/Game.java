@@ -12,40 +12,17 @@ import java.io.IOException;
 
 public class Game {
     private Screen screen;
-    private Hero hero;
+    private Arena arena;
 
     private void draw() throws IOException {
         this.screen.clear();
-        this.hero.draw(screen);
+        this.arena.draw(screen);
         this.screen.refresh();
     }
 
-    private void processKey(KeyStroke key) throws IOException {
-        switch (key.getKeyType()){
-            case ArrowDown:
-                moveHero(this.hero.moveDown());
-                break;
-            case ArrowUp:
-                moveHero(this.hero.moveUp());
-                break;
-            case ArrowLeft:
-                moveHero(this.hero.moveLeft());
-                break;
-            case ArrowRight:
-                moveHero(this.hero.moveRight());
-                break;
-            case Character:
-                screen.close(); //next keystroke will be EOF because screen was closed
-        }
-
-    }
-
-    private void moveHero(Position position) {
-        this.hero.setPosition(position);
-    }
 
     public Game(){
-        this.hero = new Hero(10, 10);
+        this.arena = new Arena(40, 20);
 
         try {
             TerminalSize terminalSize = new TerminalSize(40, 20);
@@ -67,11 +44,12 @@ public class Game {
         while(true) {
             draw();
             KeyStroke key = screen.readInput();
+
             if (key.getKeyType() == KeyType.EOF) {
                 System.out.println("EOF");
                 break;
             }
-            processKey(key);
+            arena.processKey(key);
         }
     }
 
