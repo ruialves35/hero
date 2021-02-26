@@ -23,21 +23,25 @@ public class Game {
     private void processKey(KeyStroke key) throws IOException {
         switch (key.getKeyType()){
             case ArrowDown:
-                this.hero.moveDown();
+                moveHero(this.hero.moveDown());
                 break;
             case ArrowUp:
-                this.hero.moveUp();
+                moveHero(this.hero.moveUp());
                 break;
             case ArrowLeft:
-                this.hero.moveLeft();
+                moveHero(this.hero.moveLeft());
                 break;
             case ArrowRight:
-                this.hero.moveRight();
+                moveHero(this.hero.moveRight());
                 break;
             case Character:
                 screen.close(); //next keystroke will be EOF because screen was closed
         }
 
+    }
+
+    private void moveHero(Position position) {
+        this.hero.setPosition(position);
     }
 
     public Game(){
