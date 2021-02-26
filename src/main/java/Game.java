@@ -16,7 +16,7 @@ public class Game {
 
     private void draw() throws IOException {
         this.screen.clear();
-        this.arena.draw(screen);
+        this.arena.draw(screen.newTextGraphics());
         this.screen.refresh();
     }
 
