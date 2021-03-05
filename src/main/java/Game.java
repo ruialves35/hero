@@ -50,6 +50,11 @@ public class Game {
                 break;
             }
             arena.processKey(key);
+
+            if (!arena.verifyMonsterCollisions()) {
+                this.screen.close();
+                System.out.println("You lost, a monster killed you. Play better next time :3");
+            }
         }
     }
 
