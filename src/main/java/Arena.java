@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class Arena {
     private int width;
     private int height;
@@ -163,6 +164,7 @@ public class Arena {
         moveMonsters();
     }
 
+
     public void draw(TextGraphics graphics) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
@@ -179,6 +181,7 @@ public class Arena {
             monster.draw(graphics);
     }
 
+
     public void moveMonsters(){
         for (Monster monster : monsters){
             Position position = monster.move();
@@ -188,6 +191,7 @@ public class Arena {
         }
     }
 
+    
     public boolean verifyMonsterCollisions(){
         for (Monster monster : monsters){
             if (monster.position.equals(hero.position))
